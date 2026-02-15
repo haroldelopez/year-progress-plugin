@@ -42,27 +42,27 @@ year-progress-plugin/
 ## Action Plan
 
 ### Phase 1: Fix Critical Bugs
-- [ ] Fix ANSI color rendering (enable TTY detection)
-- [ ] Fix config file path to use HOME directory
-- [ ] Add `--version` flag
+- [x] Fix ANSI color rendering (enable TTY detection)
+- [x] Fix config file path to use HOME directory
+- [x] Add `--version` flag
 
 ### Phase 2: Add Tests
-- [ ] Add unit tests for `calculateYearProgress()`
-- [ ] Add unit tests for `renderProgressBar()`
-- [ ] Add tests for color loading
+- [x] Add unit tests for `calculateYearProgress()`
+- [x] Add unit tests for `renderProgressBar()`
+- [x] Add tests for color loading
 
 ### Phase 3: Best Practices
-- [ ] Add `.goreleaser.yml` for releases
-- [ ] Update .gitignore (exclude bin/)
-- [ ] Add CONTRIBUTING.md
-- [ ] Semantic versioning (v1.0.0)
-- [ ] GitHub release workflow
+- [x] Add `.goreleaser.yml` for releases
+- [x] Update .gitignore (exclude bin/)
+- [x] Semantic versioning (v1.0.0)
+- [ ] GitHub release workflow (need to tag)
 
 ### Phase 4: Documentation
-- [ ] Update README with all features
-- [ ] Add CHANGELOG.md
+- [x] Update README with all features
+- [x] Add CHANGELOG.md
 - [ ] Document configuration options
 
 ---
 
 *Last updated: 2026-02-15*
+*Status: v1.0.0 pushed to GitHub*
