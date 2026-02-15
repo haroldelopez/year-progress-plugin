@@ -43,42 +43,35 @@ mkdir -p "$INSTALL_DIR"
 # Download and install
 echo "Installing year-progress for $OS/$ARCH..."
 
-# Try curl first, then wget
 if command -v curl &> /dev/null; then
-    HTTP_CODE=$(curl -sSL -o "$INSTALL_DIR/year-progress" -w "%{http_code}" "$DOWNLOAD_URL" || true)
-    if [ "$HTTP_CODE" = "404" ]; then
+    if curl -sSL --fail -o "$INSTALL_DIR/year-progress" "$DOWNLOAD_URL"; then
+        chmod +x "$INSTALL_DIR/year-progress"
+        echo "✅ Installed to $INSTALL_DIR/year-progress"
+        echo ""
+        echo "Run 'year-progress' to start!"
+    else
         rm -f "$INSTALL_DIR/year-progress"
         echo "❌ Binary not found for $OS/$ARCH"
         echo "Building from source instead..."
         if command -v go &> /dev/null; then
             go install github.com/haroldelopez/year-progress-plugin@latest
             echo "✅ Installed via Go"
-            exit 0
         else
             echo "❌ Go not installed. Please install from: https://go.dev/dl/"
             exit 1
         fi
-    elif [ "$HTTP_CODE" = "404" ]; then
-        # Already handled above
-        true
     fi
 elif command -v wget &> /dev/null; then
-    wget -qO "$INSTALL_DIR/year-progress" "$DOWNLOAD_URL" || {
-        echo "❌ Failed to download. Trying Go install..."
-        if command -v go &> /dev/null; then
-            go install github.com/haroldelopez/year-progress-plugin@latest
-        else
-            echo "❌ Go not installed. Please install from: https://go.dev/dl/"
-            exit 1
-        fi
-    }
+    if wget -qO "$INSTALL_DIR/year-progress" "$DOWNLOAD_URL"; then
+        chmod +x "$INSTALL_DIR/year-progress"
+        echo "✅ Installed to $INSTALL_DIR/year-progress"
+        echo "Run 'year-progress' to start!"
+    else
+        rm -f "$INSTALL_DIR/year-progress"
+        echo "❌ Failed to download"
+        exit 1
+    fi
 else
     echo "Error: curl or wget required"
     exit 1
 fi
-
-chmod +x "$INSTALL_DIR/year-progress"
-
-echo "✅ Installed to $INSTALL_DIR/year-progress"
-echo ""
-echo "Run 'year-progress' to start!"
