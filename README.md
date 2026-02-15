@@ -20,9 +20,17 @@ A colorful command-line tool and Oh My Zsh plugin that displays the current year
 - 📁 XDG_CONFIG_HOME support
 - 🔧 Multiple CLI flags available
 
-## Installation
+## Quick Install (One-Liner)
 
-### Package Managers
+### With Go
+```bash
+go install github.com/haroldelopez/year-progress-plugin@latest
+```
+
+### With curl (Linux/macOS)
+```bash
+curl -sSL https://raw.githubusercontent.com/haroldelopez/year-progress-plugin/master/install.sh | bash
+```
 
 #### Homebrew (macOS / Linux)
 
