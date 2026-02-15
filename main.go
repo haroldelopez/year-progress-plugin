@@ -17,7 +17,7 @@ import (
 // Version information
 const (
 	Version           = "1.0.0"
-	ProgressBarLength = 100
+	ProgressBarLength = 30
 	DefaultConfigFile = ".year_progress_colors.json"
 )
 
@@ -179,6 +179,5 @@ func main() {
 		// This is a simplified approach - for production use a color library
 	}
 
-	fmt.Printf("Year Progress is: %.2f%%\n", progress)
-	fmt.Println(progressBar)
+	fmt.Printf("Year Progress: %.2f%% %s\n", progress, progressBar)
 }
