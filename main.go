@@ -165,8 +165,12 @@ func main() {
 	}
 
 	if err := loadColors(configFile); err != nil {
-		log.Printf("Warning: Failed to load color config: %v", err)
-		log.Println("Using default colors")
+		// Silently use defaults if config file not found
+		// Only log if there's a real error (not "file not found")
+		if !os.IsNotExist(err) {
+			log.Printf("Warning: Failed to load color config: %v", err)
+			log.Println("Using default colors")
+		}
 	}
 
 	// Get progress for current time
