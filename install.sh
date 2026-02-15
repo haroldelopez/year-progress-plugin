@@ -44,7 +44,7 @@ mkdir -p "$INSTALL_DIR"
 echo "Installing year-progress for $OS/$ARCH..."
 
 if command -v curl &> /dev/null; then
-    if curl -sSL --fail -o "$INSTALL_DIR/year-progress" "$DOWNLOAD_URL"; then
+    if curl -sSLf -o "$INSTALL_DIR/year-progress" "$DOWNLOAD_URL"; then
         chmod +x "$INSTALL_DIR/year-progress"
         echo "✅ Installed to $INSTALL_DIR/year-progress"
         echo ""
