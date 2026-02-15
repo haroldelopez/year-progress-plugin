@@ -1,5 +1,6 @@
 #!/bin/bash
 # Year Progress Plugin - One-line installer
+# Usage: curl -sSL https://raw.githubusercontent.com/haroldelopez/year-progress-plugin/master/install.sh | bash
 
 set -e
 
@@ -15,7 +16,7 @@ case "$ARCH" in
     i386|i686) ARCH="386" ;;
 esac
 
-# Map OS
+# Map OS to match release naming
 case "$OS" in
     darwin) OS="mac" ;;
     linux|freebsd|openbsd) ;;
@@ -24,28 +25,8 @@ esac
 
 # Build binary name
 BINARY_NAME="year-progress_${OS}_${ARCH}"
-
-# Get latest release URL
-RELEASE_URL="https://api.github.com/repos/haroldelopez/year-progress-plugin/releases/latest"
-
-# Detect if curl or wget is available
-if command -v curl &> /dev/null; then
-    DOWNLOAD_CMD="curl -sSL"
-elif command -v wget &> /dev/null; then
-    DOWNLOAD_CMD="wget -qO-"
-else
-    echo "Error: curl or wget required"
-    exit 1
-fi
-
-# Get download URL
-DOWNLOAD_URL=$($DOWNLOAD_CMD "$RELEASE_URL" | grep -o "https.*${BINARY_NAME}" | head -1)
-
-if [ -z "$DOWNLOAD_URL" ]; then
-    echo "Error: No binary found for $OS/$ARCH"
-    echo "Please build from source: go install github.com/haroldelopez/year-progress-plugin@latest"
-    exit 1
-fi
+BASE_URL="https://github.com/haroldelopez/year-progress-plugin/releases/download/v1.0.0"
+DOWNLOAD_URL="${BASE_URL}/${BINARY_NAME}"
 
 # Install to ~/.local/bin or /usr/local/bin
 if [ -w "$HOME/.local/bin" ]; then
@@ -56,10 +37,48 @@ else
     INSTALL_DIR="$HOME/.local/bin"
 fi
 
+# Ensure install dir exists
+mkdir -p "$INSTALL_DIR"
+
 # Download and install
 echo "Installing year-progress for $OS/$ARCH..."
-$DOWNLOAD_URL "$DOWNLOAD_URL" -o "$INSTALL_DIR/year-progress"
+
+# Try curl first, then wget
+if command -v curl &> /dev/null; then
+    HTTP_CODE=$(curl -sSL -o "$INSTALL_DIR/year-progress" -w "%{http_code}" "$DOWNLOAD_URL" || true)
+    if [ "$HTTP_CODE" = "404" ]; then
+        rm -f "$INSTALL_DIR/year-progress"
+        echo "❌ Binary not found for $OS/$ARCH"
+        echo "Building from source instead..."
+        if command -v go &> /dev/null; then
+            go install github.com/haroldelopez/year-progress-plugin@latest
+            echo "✅ Installed via Go"
+            exit 0
+        else
+            echo "❌ Go not installed. Please install from: https://go.dev/dl/"
+            exit 1
+        fi
+    elif [ "$HTTP_CODE" = "404" ]; then
+        # Already handled above
+        true
+    fi
+elif command -v wget &> /dev/null; then
+    wget -qO "$INSTALL_DIR/year-progress" "$DOWNLOAD_URL" || {
+        echo "❌ Failed to download. Trying Go install..."
+        if command -v go &> /dev/null; then
+            go install github.com/haroldelopez/year-progress-plugin@latest
+        else
+            echo "❌ Go not installed. Please install from: https://go.dev/dl/"
+            exit 1
+        fi
+    }
+else
+    echo "Error: curl or wget required"
+    exit 1
+fi
+
 chmod +x "$INSTALL_DIR/year-progress"
 
 echo "✅ Installed to $INSTALL_DIR/year-progress"
+echo ""
 echo "Run 'year-progress' to start!"
