@@ -14,13 +14,64 @@ A colorful command-line tool and Oh My Zsh plugin that displays the current year
 | FreeBSD | amd64 | ✅ |
 | OpenBSD | amd64 | ✅ |
 
+## Features
+
 - 🎨 Random colored progress bar
 - ⚙️ Customizable colors via JSON config
 - 🖥️ Works as CLI or Oh My Zsh plugin
 - 📁 XDG_CONFIG_HOME support
 - 🔧 Multiple CLI flags available
 
+## Quick Install (One-Liner)
+
+### With Go (Recommended)
+```bash
+go install github.com/haroldelopez/year-progress-plugin@latest
+```
+
+> ⚠️ **Note:** This repository is private. For `go install` to work, you may need to configure GitHub token authentication or use the manual download method below.
+
+### With curl (Linux/macOS)
+```bash
+curl -sSL https://raw.githubusercontent.com/haroldelopez/year-progress-plugin/master/install.sh | bash
+```
+
 ## Installation
+
+### Package Managers
+
+#### Homebrew (macOS / Linux)
+
+```bash
+# Coming soon - formula not yet submitted
+# Once published:
+brew install year-progress
+```
+go install github.com/haroldelopez/year-progress-plugin@latest
+```
+
+#### Manual Download
+
+Download the latest binary from the [releases](https://github.com/haroldelopez/year-progress-plugin/releases):
+
+```bash
+# Linux amd64
+curl -L https://github.com/haroldelopez/year-progress-plugin/releases/latest/download/year-progress_linux_amd64 -o year-progress
+chmod +x year-progress
+./year-progress
+
+# Linux ARM
+curl -L https://github.com/haroldelopez/year-progress-plugin/releases/latest/download/year_progress_linux_arm -o year-progress
+
+# macOS Intel
+curl -L https://github.com/haroldelopez/year-progress-plugin/releases/latest/download/year_progress_mac_amd64 -o year-progress
+
+# macOS Apple Silicon
+curl -L https://github.com/haroldelopez/year-progress-plugin/releases/latest/download/year_progress_mac_arm64 -o year-progress
+```
+
+### As Oh My Zsh Plugin
+>>>>>>> feat/one-liner-install
 
 ### Package Managers
 
