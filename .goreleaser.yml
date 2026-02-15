@@ -1,0 +1,62 @@
+# .goreleaser.yml
+# https://goreleaser.com/configuration
+
+project_name: year-progress
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: year-progress
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - freebsd
+      - openbsd
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    ldflags:
+      - -s -w
+      - -X main.Version={{.Version}}
+
+archives:
+  - id: default
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE
+      - year_progress.plugin.zsh
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+
+release:
+  github:
+    owner: haroldelopez
+    name: year-progress-plugin
+  draft: false
+  prerelease: auto
+
+announcements:
+  twitter:
+    enabled: false
