@@ -29,8 +29,6 @@ A colorful command-line tool and Oh My Zsh plugin that displays the current year
 go install github.com/haroldelopez/year-progress-plugin@latest
 ```
 
-> ⚠️ **Note:** This repository is private. For `go install` to work, you may need to configure GitHub token authentication or use the manual download method below.
-
 ### With curl (Linux/macOS)
 ```bash
 curl -sSL https://raw.githubusercontent.com/haroldelopez/year-progress-plugin/master/install.sh | bash
