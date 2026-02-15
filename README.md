@@ -160,7 +160,21 @@ year_progress
 
 ### Custom Colors
 
-You can customize the colors by creating a JSON configuration file:
+You can customize the colors by creating a JSON configuration file.
+
+#### Quick Start with Examples
+
+We provide example configurations in the `examples/` directory:
+
+```bash
+# Classic colors (warm tones)
+cp examples/colors-classic.json ~/.year_progress_colors.json
+
+# Neon colors (bright/bold)
+cp examples/colors-neon.json ~/.year_progress_colors.json
+```
+
+#### Manual Configuration
 
 1. Create `.year_progress_colors.json` in your home directory or use XDG_CONFIG_HOME:
 

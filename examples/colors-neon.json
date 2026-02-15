@@ -1,0 +1,8 @@
+{
+  "BrightGreen": "\u001b[92m",
+  "BrightYellow": "\u001b[93m",
+  "BrightBlue": "\u001b[94m",
+  "BrightMagenta": "\u001b[95m",
+  "BrightCyan": "\u001b[96m",
+  "Reset": "\u001b[0m"
+}
