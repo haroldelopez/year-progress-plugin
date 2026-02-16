@@ -10,13 +10,15 @@ import (
 	"math/big"
 	"os"
 	"path/filepath"
+	"regexp"
+	"strconv"
 	"strings"
 	"time"
 )
 
 // Version information
 const (
-	Version           = "1.0.0"
+	Version           = "1.0.3"
 	ProgressBarLength = 30
 	DefaultConfigFile = ".year_progress_colors.json"
 )
@@ -35,6 +37,65 @@ var defaultColors = map[string]string{
 	"Reset":  "\033[0m",
 }
 
+// hexColorRegex matches hex color codes like #FF0000 or FF0000
+var hexColorRegex = regexp.MustCompile(`^#?([0-9A-Fa-f]{6})$`)
+
+// hexToANSI converts a hex color code to ANSI 256-color escape sequence
+func hexToANSI(hex string) string {
+	// Remove # if present
+	hex = strings.TrimPrefix(hex, "#")
+
+	// Parse hex color
+	r, err := strconv.ParseInt(hex[0:2], 16, 64)
+	if err != nil {
+		return ""
+	}
+	g, err := strconv.ParseInt(hex[2:4], 16, 64)
+	if err != nil {
+		return ""
+	}
+	b, err := strconv.ParseInt(hex[4:6], 16, 64)
+	if err != nil {
+		return ""
+	}
+
+	// Convert to ANSI 256 color
+	// Formula for true color to 256 color
+	if r == int64(b) && int64(b) == g {
+		// Grayscale
+		if r < 8 {
+			return "\033[232m"
+		}
+		if r > 248 {
+			return "\033[231m"
+		}
+		gray := int((r - 8) / 247 * 24)
+		return fmt.Sprintf("\033[38;5;%dm", gray)
+	}
+
+	// Color
+	rIdx := int(r / 51)
+	gIdx := int(g / 51)
+	bIdx := int(b / 51)
+
+	ansi := 16 + (rIdx * 36) + (gIdx * 6) + bIdx
+	return fmt.Sprintf("\033[38;5;%dm", ansi)
+}
+
+// processColor processes a color string - converts hex to ANSI if needed
+func processColor(color string) string {
+	// Check if it's a hex color
+	if hexColorRegex.MatchString(color) {
+		ansi := hexToANSI(color)
+		if ansi != "" {
+			return ansi
+		}
+	}
+
+	// Return as-is (assume it's already an ANSI code)
+	return color
+}
+
 // loadColors reads the color definitions from a JSON file
 func loadColors(configPath string) error {
 	file, err := os.Open(configPath)
@@ -48,9 +109,21 @@ func loadColors(configPath string) error {
 		return err
 	}
 
-	err = json.Unmarshal(bytes, &ColorPalette)
+	// First, parse raw JSON to detect hex colors
+	var rawColors map[string]interface{}
+	err = json.Unmarshal(bytes, &rawColors)
 	if err != nil {
 		return err
+	}
+
+	// Process colors: convert hex to ANSI
+	ColorPalette = make(map[string]string)
+	for name, value := range rawColors {
+		colorStr, ok := value.(string)
+		if !ok {
+			continue
+		}
+		ColorPalette[name] = processColor(colorStr)
 	}
 
 	// Ensure that we always have a Reset color
@@ -177,11 +250,8 @@ func main() {
 	progress := calculateYearProgress(time.Now())
 	progressBar := renderProgressBar(progress, ProgressBarLength)
 
-	// Disable colors if not a TTY and --force-color not set
-	if !*forceColor {
-		// Colors are already raw ANSI, no special handling needed
-		// This is a simplified approach - for production use a color library
-	}
+	// Note: forceColor flag is reserved for future use (TTY detection)
+	_ = *forceColor
 
 	fmt.Printf("Year Progress: %.2f%% %s\n", progress, progressBar)
 }
