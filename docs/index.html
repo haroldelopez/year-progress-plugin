@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year Progress Plugin</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .tagline {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .demo {
+            background: #1a1a2e;
+            color: #0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        .demo-label {
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .progress-bar {
+            color: #0f0;
+            white-space: pre;
+        }
+        .install {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .install code {
+            background: #333;
+            color: #fff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .install pre {
+            background: #333;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .feature {
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .feature h3 { margin-bottom: 0.5rem; }
+        .feature p { color: #666; font-size: 0.9rem; }
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+        }
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Year Progress Plugin</h1>
+        <p class="tagline">A colorful CLI tool that displays your year's progress as an ASCII art progress bar</p>
+
+        <div class="demo">
+            <div class="demo-label">Demo:</div>
+            <div class="progress-bar">Year Progress: 12.55% [████▌░░░░░░░░░░░░░░░░░░░░░░░░░░]</div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>🎨 Custom Colors</h3>
+                <p>Choose from classic or neon color schemes, or create your own</p>
+            </div>
+            <div class="feature">
+                <h3>🖥️ Multi-Platform</h3>
+                <p>Linux, macOS, FreeBSD, and OpenBSD support</p>
+            </div>
+            <div class="feature">
+                <h3>⚡ Fast Install</h3>
+                <p>One-line install with curl or go install</p>
+            </div>
+            <div class="feature">
+                <h3>🐚 Oh My Zsh</h3>
+                <p>Use as a Zsh plugin for auto-display on terminal open</p>
+            </div>
+        </div>
+
+        <div class="install">
+            <h3>🚀 Quick Install</h3>
+            <pre>curl -sSL https://raw.githubusercontent.com/haroldelopez/year-progress-plugin/master/install.sh | bash</pre>
+            <p style="margin-top: 1rem;">Or with Go:</p>
+            <pre>go install github.com/haroldelopez/year-progress-plugin@latest</pre>
+        </div>
+
+        <div class="buttons">
+            <a href="https://github.com/haroldelopez/year-progress-plugin" class="btn btn-primary">View on GitHub</a>
+            <a href="https://github.com/haroldelopez/year-progress-plugin/releases" class="btn btn-secondary">Download</a>
+        </div>
+
+        <footer>
+            <p>Made with ❤️ by <a href="https://github.com/haroldelopez">haroldelopez</a></p>
+            <p>MIT License</p>
+        </footer>
+    </div>
+</body>
+</html>
