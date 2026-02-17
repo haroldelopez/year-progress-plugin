@@ -208,6 +208,8 @@ You can customize the colors by creating a JSON configuration file:
 | Flag | Description |
 |------|-------------|
 | `-v`, `--version` | Show version information |
+| `--percentage` | Output only the percentage number (useful for scripts) |
+| `--json` | Output in JSON format |
 | `--config <path>` | Path to custom color config file |
 | `--force-color` | Force color output (useful in scripts) |
 

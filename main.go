@@ -216,7 +216,8 @@ func main() {
 	// Parse flags
 	version := flag.Bool("v", false, "Show version")
 	versionLong := flag.Bool("version", false, "Show version")
-	forceColor := flag.Bool("force-color", false, "Force color output")
+	percentageOnly := flag.Bool("percentage", false, "Output only the percentage number")
+	jsonOutput := flag.Bool("json", false, "Output in JSON format")
 	configPath := flag.String("config", "", "Path to config file")
 	flag.Parse()
 
@@ -225,7 +226,16 @@ func main() {
 		os.Exit(0)
 	}
 
-	// Initialize color palette with defaults
+	// Get progress for current time
+	progress := calculateYearProgress(time.Now())
+
+	// Output formats
+	if *percentageOnly {
+		fmt.Printf("%.2f\n", progress)
+		return
+	}
+
+	// Initialize color palette with defaults (only needed for progress bar)
 	ColorPalette = make(map[string]string)
 	for k, v := range defaultColors {
 		ColorPalette[k] = v
@@ -238,14 +248,14 @@ func main() {
 	}
 
 	// Try to load - silently use defaults if file doesn't exist or can't be read
-	loadColors(configFile) // Error is intentionally ignored - defaults will be used
+	loadColors(configFile)
 
-	// Get progress for current time
-	progress := calculateYearProgress(time.Now())
 	progressBar := renderProgressBar(progress, ProgressBarLength)
 
-	// Note: forceColor flag is reserved for future use (TTY detection)
-	_ = *forceColor
-
-	fmt.Printf("Year Progress: %.2f%% %s\n", progress, progressBar)
+	if *jsonOutput {
+		// For JSON, output clean percentage only (no ANSI codes)
+		fmt.Printf("{\"percentage\":%.2f}\n", progress)
+	} else {
+		fmt.Printf("Year Progress: %.2f%% %s\n", progress, progressBar)
+	}
 }
