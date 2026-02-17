@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# Get the directory where this plugin is located
+PLUGIN_DIR="${0:a:h}"
+
 # Determine the correct binary based on the system
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   if [[ "$(uname -m)" == "x86_64" ]]; then
@@ -20,7 +23,7 @@ fi
 
 # Function to run the year progress binary
 function year_progress() {
-  "${0:A:h}/bin/$BINARY"
+  "$PLUGIN_DIR/bin/$BINARY"
 }
 
 # Function to check if the plugin should run
