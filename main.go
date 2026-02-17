@@ -231,20 +231,14 @@ func main() {
 		ColorPalette[k] = v
 	}
 
-	// Load colors from config file
+	// Load colors from config file if provided (silent - no logging)
 	configFile := *configPath
 	if configFile == "" {
 		configFile = getConfigPath()
 	}
 
-	if err := loadColors(configFile); err != nil {
-		// Silently use defaults if config file not found
-		// Only log if there's a real error (not "file not found")
-		if !os.IsNotExist(err) {
-			log.Printf("Warning: Failed to load color config: %v", err)
-			log.Println("Using default colors")
-		}
-	}
+	// Try to load - silently use defaults if file doesn't exist or can't be read
+	loadColors(configFile) // Error is intentionally ignored - defaults will be used
 
 	// Get progress for current time
 	progress := calculateYearProgress(time.Now())
