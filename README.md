@@ -112,10 +112,19 @@ curl -L https://github.com/haroldelopez/year-progress-plugin/releases/latest/dow
 1. Clone this repository into your Oh My Zsh custom plugins directory:
 
    ```bash
+   # Using HTTPS (recommended)
+   git clone https://github.com/haroldelopez/year-progress-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/year-progress
+   
+   # Or using SSH
    git clone git@github.com:haroldelopez/year-progress-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/year-progress
    ```
 
-2. Add the plugin to your Oh My Zsh plugins list in `~/.zshrc`:
+2. Verify the structure (should have `year_progress.plugin.zsh` and `bin/` folder):
+   ```bash
+   ls ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/year-progress
+   ```
+
+3. Add the plugin to your Oh My Zsh plugins list in `~/.zshrc`:
 
    ```bash
    plugins=(... year-progress)
