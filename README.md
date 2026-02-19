@@ -22,6 +22,27 @@ A colorful command-line tool and Oh My Zsh plugin that displays the current year
 - 📁 XDG_CONFIG_HOME support
 - 🔧 Multiple CLI flags available
 
+## Examples
+
+### Default Output
+```
+Year Progress: 13.08% [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]
+```
+
+![Default Colors](docs/03f5423a-6147-49cc-90d4-a509493e1db3.jpg)
+
+### Percentage Only
+```bash
+$ year-progress --percentage
+13.08
+```
+
+### JSON Output
+```bash
+$ year-progress --json
+{"percentage":13.08}
+```
+
 ## Quick Install (One-Liner)
 
 ### With Go (Recommended)
