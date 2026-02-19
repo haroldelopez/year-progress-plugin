@@ -31,6 +31,18 @@ Year Progress: 13.08% [███░░░░░░░░░░░░░░░░
 
 ![Default Colors](docs/03f5423a-6147-49cc-90d4-a509493e1db3.jpg)
 
+### With Custom Colors (Neon)
+
+![Neon Colors](docs/6fef4e81-4e54-4257-9afc-fe518ae89b19.jpg)
+
+### With Custom Colors (Pastel)
+
+![Pastel Colors](docs/7c56e310-f8ab-41e2-9035-24a04a11f5f9.jpg)
+
+### With Custom Colors (Classic)
+
+![Classic Colors](docs/291a9626-dad6-4619-90cb-b6d20f902164.jpg)
+
 ### Percentage Only
 ```bash
 $ year-progress --percentage
