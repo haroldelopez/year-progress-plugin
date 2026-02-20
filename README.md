@@ -11,6 +11,7 @@ A colorful command-line tool and Oh My Zsh plugin that displays the current year
 | Linux | ARM | ✅ |
 | macOS | amd64 (Intel) | ✅ |
 | macOS | arm64 (Apple Silicon) | ✅ |
+| Windows | amd64 | ✅ |
 | FreeBSD | amd64 | ✅ |
 | OpenBSD | amd64 | ✅ |
 
