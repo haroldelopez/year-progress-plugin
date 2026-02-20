@@ -2,27 +2,6 @@
 
 A colorful command-line tool and Oh My Zsh plugin that displays the current year's progress as an ASCII progress bar.
 
-## Supported Platforms
-
-| OS | Architecture | Supported |
-|----|--------------|-----------|
-| Linux | amd64 (x86_64) | ✅ |
-| Linux | 386 (i386) | ✅ |
-| Linux | ARM | ✅ |
-| macOS | amd64 (Intel) | ✅ |
-| macOS | arm64 (Apple Silicon) | ✅ |
-| Windows | amd64 | ✅ |
-| FreeBSD | amd64 | ✅ |
-| OpenBSD | amd64 | ✅ |
-
-## Features
-
-- 🎨 Random colored progress bar
-- ⚙️ Customizable colors via JSON config
-- 🖥️ Works as CLI or Oh My Zsh plugin
-- 📁 XDG_CONFIG_HOME support
-- 🔧 Multiple CLI flags available
-
 ## Examples
 
 ### Default Output
@@ -55,6 +34,27 @@ $ year-progress --percentage
 $ year-progress --json
 {"percentage":13.08}
 ```
+
+## Supported Platforms
+
+| OS | Architecture | Supported |
+|----|--------------|-----------|
+| Linux | amd64 (x86_64) | ✅ |
+| Linux | 386 (i386) | ✅ |
+| Linux | ARM | ✅ |
+| macOS | amd64 (Intel) | ✅ |
+| macOS | arm64 (Apple Silicon) | ✅ |
+| Windows | amd64 | ✅ |
+| FreeBSD | amd64 | ✅ |
+| OpenBSD | amd64 | ✅ |
+
+## Features
+
+- 🎨 Random colored progress bar
+- ⚙️ Customizable colors via JSON config
+- 🖥️ Works as CLI or Oh My Zsh plugin
+- 📁 XDG_CONFIG_HOME support
+- 🔧 Multiple CLI flags available
 
 ## Quick Install (One-Liner)
 
